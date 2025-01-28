@@ -8,35 +8,27 @@ library(sf)
 library(rJava)
 
 # verificando la existencia de la especie en GBIF -------------------------
-especie_info <- name_backbone(name = "Lycalopex culpaeus")
+especie_info <- name_backbone(name = "Lycalopex culpaeus")  #cambiar el nombre por el de la especie de interés
 print(especie_info)
 taxon_key <- especie_info$usageKey
 
-culpeo_data <- occ_search(taxonKey = taxon_key,
+especie_data <- occ_search(taxonKey = taxon_key,
                           country = "CL",
                           hasCoordinate = TRUE,
-                          limit = 5000)
+                          limit = 5000)  #la cantidad de datos puede variar
 
-data_ocurrencias <- culpeo_data$data
-
-# filtrar datos: eliminar inaturalist -------------------------------------
-data_ocurrencias_filtered <- data_ocurrencias %>%   # Filtrar registros eliminando los provenientes de iNaturalist
-  filter(
-    !grepl("inaturalist.org", references, ignore.case = TRUE)  # Excluir iNaturalist
-  )
+data_ocurrencias <- especie_data$data
 
 # en base a observaciones -------------------------------------------------
-data_ocurrencias_filtered <- data_ocurrencias_filtered %>%
+data_ocurrencias_filtered <- data_ocurrencias %>%
   filter(basisOfRecord %in% c("HUMAN_OBSERVATION", "MACHINE_OBSERVATION"))
 
 # mmm veamos issues mejor -------------------------------------------------
 unique(data_ocurrencias$issues)
 
-data_ocurrencias_filtered <- data_ocurrencias %>%
+data_ocurrencias_filtered <- data_ocurrencias %>%  #OJO, ESTO ELIMINA TODOS LOS DATOS
   filter(issues == "")  # Solo registros sin problemas reportados
 
-# Ver cantidad de registros filtrados
-nrow(data_filtered)
 
 # mmmmmm aber, viendo instituciones de origen -----------------------------
 unique(data_ocurrencias$publishingOrgKey)
@@ -51,7 +43,7 @@ get_org_name <- function(org_key) {              # Función para obtener el nomb
 org_names <- unique(data_ocurrencias$publishingOrgKey)
 org_info <- sapply(org_names, get_org_name)
 
-print(org_info) # Ver los resultados
+print(org_info) # Ver los resultados y analizar si alguno no corresponde
 
 #28eb1a3f-1c15-4a95-931a-4af90ecb574d      1f00d75c-f6fc-4224-a595-975e82d7689c      e2e717bf-551a-4917-bdc9-4fa0f342c530 
 #         "iNaturalist.org"              "Xeno-canto Foundation for Nature Sounds"        "Cornell Lab of Ornithology"
@@ -59,14 +51,14 @@ print(org_info) # Ver los resultados
 
 # Eliminar datos de iNaturalist.org ---------------------------------------
 data_ocurrencias_filtered <- data_ocurrencias_filtered %>%
-  filter(publishingOrgKey != "28eb1a3f-1c15-4a95-931a-4af90ecb574d")
+  filter(publishingOrgKey != "28eb1a3f-1c15-4a95-931a-4af90ecb574d")  #esto es equivalente a references, reemplazar por los códigos que no son fuentes confiables
 
 # Precisión espacial adecuada ---------------------------------------------
 data_ocurrencias_filtered <- data_ocurrencias_filtered %>%
   filter(coordinateUncertaintyInMeters <= 1000 | is.na(coordinateUncertaintyInMeters))  # Incertidumbre < 1 km
 
 # Fecha (actuales) --------------------------------------------------------
-data_ocurrencias_filtered <- data_ocurrencias_filtered %>%
+data_ocurrencias_filtered <- data_ocurrencias_filtered %>%  #esto no porque el modelo actual abarca hartos años
   filter(year >= 2023)  # Solo registros de los últimos 2 años
 
 # cautiverio o zoo --------------------------------------------------------
