@@ -2,39 +2,40 @@ library(httr)
 library(terra)
 library(sf)
 library(dismo)
+library(jsonlite)
 
-url_base <- "https://arclim.mma.gob.cl/api/datos"
+url_base <- "https://arclim.mma.gob.cl/api/datos"  # URL base de la API ARClim
 
-capa <- "arclim_raster_5km"
-formato <- "geojson"
-atributos <- "$CLIMA$eto_mean$annual$present"
+variables <- c("eto_mean", "pr_sum", "rsds_mean", "tasmin_mean", "tasmax_mean")  # Lista de variables climáticas a descargar
 
-# Corregir el nombre del parámetro en la URL
-url <- paste0(url_base, "/", capa, "/", formato, "/?attributes=", URLencode(atributos))
+raster_list <- list()  # Crear una lista vacía para almacenar los rasters
 
-response <- GET(url)
-
-# Verificar si la API responde correctamente
-print(content(response, "text"))
-
-
-# Verifica si la consulta fue exitosa
-if (status_code(response) == 200) {
-  # Guarda los datos descargados como un archivo temporal
-  geojson_file <- tempfile(fileext = ".geojson")
-  writeBin(content(response, "raw"), geojson_file)
+for (var in variables) {  # Descargar y procesar cada variable climática
+  atributos <- paste0("$CLIMA$", var, "$annual$present")  # Construir la URL con el nombre de la variable
+  url <- paste0(url_base, "/arclim_raster_5km/geojson/?attributes=", URLencode(atributos))
   
-  # Carga los datos GeoJSON como un objeto de tipo SpatRaster (raster en terra)
-  vect_data <- vect(geojson_file)
+  response <- GET(url)  # Realizar la consulta a la API
   
-  # Convierte el vector a raster
-  raster_data <- rast(vect_data, resolution = 0.05)  # Cambia la resolución si es necesario
-  raster_data <- rasterize(vect_data, raster_data, field = "$CLIMA$eto_mean$annual$present")  # Usa el campo relevante
-  
-  # Muestra un resumen del raster cargado
-  print(raster_data)
-  plot(raster_data)
-} else {
-  # Manejo de errores si la consulta falla
-  print(paste("Error al descargar los datos. Código de estado:", status_code(response)))
+  if (status_code(response) == 200) {  # Verificar si la respuesta fue exitosa
+    
+    geojson_file <- tempfile(fileext = ".geojson")  # Guardar datos descargados como archivo temporal
+    writeBin(content(response, "raw"), geojson_file)
+    
+    vect_data <- vect(geojson_file)  # Cargar los datos como un objeto SpatVector
+    
+    raster_data <- rast(vect_data, resolution = 0.05)  # Crear un raster con la misma resolución para todas las capas
+    raster_data <- rasterize(vect_data, raster_data, field = atributos)  # Usa la variable correcta
+    
+    raster_list[[var]] <- raster_data  # Guardar raster en la lista con el nombre de la variable
+    
+  } else {
+    print(paste("❌ Error al descargar", var, "- Código:", status_code(response)))
+  }
 }
+
+raster_stack <- rast(raster_list)  # Combinar todas las capas en un solo objeto SpatRaster
+
+print(raster_stack)  # Mostrar información del stack
+plot(raster_stack)
+
+
