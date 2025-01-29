@@ -48,8 +48,17 @@ response(model)
 
 
 # Escenario delta y guardar capas -----------------------------------------
-#difference <- future_pred - pred 
-#plot(difference, main = "Cambio en idoneidad (Futuro - Actual)") 
+pred_delta <- pred_future - pred_present
+
+prob_delta_mean <- cellStats(pred_delta, stat = "mean", na.rm = TRUE)
+
+par(mfcol = c(1, 1))
+plot(pred_delta, main = "Probabilidad de ocurrencia \nLycalopex culpaeus DELTA",
+     xlim = c(-75, -65), ylim = c(-56, -17), asp=1)
+mtext(paste("Promedio:", round(prob_delta_mean, 3)), side = 1, line = 3, cex = 1)
+
+
+
 #writeRaster(difference, "delta.tif", format = "GTiff", overwrite = TRUE)
 #writeRaster(pred, "idoneidad_actual.tif", format = "GTiff", overwrite = TRUE)  #guardar capa
 #writeRaster(future_pred, "idoneidad_futura.tif", format = "GTiff", overwrite = TRUE)  #guardar capa
