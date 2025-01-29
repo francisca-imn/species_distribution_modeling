@@ -48,6 +48,12 @@ print(paste("Registros filtrados:", nrow(data_ocurrencias_filtered)))
 
 glimpse(data_ocurrencias_filtered)
 
+# 📌 Mantener solo las columnas de coordenadas ----------------------------
+data_ocurrencias_filtered <- data_ocurrencias_filtered %>%
+  select(decimalLongitude, decimalLatitude)
+
+
+
 
 # Esto no lo uso mucho porque data=0 --------------------------------------
 #unique(data_ocurrencias$issues)
