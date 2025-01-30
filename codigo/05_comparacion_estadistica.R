@@ -40,8 +40,7 @@ print(paste("Correlación DISMO vs ARCLIM (1980-2010):", round(cor_present, 3)))
 print(paste("Correlación DISMO vs ARCLIM (2035-2065):", round(cor_future, 3)))
 
 
-# Matriz de confusión -----------------------------------------------------
-
+# Matriz confusion future -------------------------------------------------
 # 1. Binarizar los mapas usando un umbral de 0.5 (ajústalo si es necesario)
 pred_future_bin <- pred_future_resampled > 0.5
 arclim_future_bin <- arclim_future > 0.5
@@ -68,14 +67,39 @@ conf_matrix <- confusionMatrix(confusion_matrix)
 print(conf_matrix$overall["Kappa"])
 
 
+# matriz confusion actual -------------------------------------------------
+
+# 📌 1. Binarizar los mapas presentes
+pred_present_bin <- pred_present_resampled > 0.5
+arclim_present_bin <- arclim_present > 0.5
+
+# 📌 2. Convertir los mapas binarizados a vectores
+pred_present_values <- values(pred_present_bin)
+arclim_present_values <- values(arclim_present_bin)
+
+# 📌 3. Remover valores NA para evitar problemas en la comparación
+valid_indices_present <- !is.na(pred_present_values) & !is.na(arclim_present_values)
+pred_present_values <- pred_present_values[valid_indices_present]
+arclim_present_values <- arclim_present_values[valid_indices_present]
+
+# 📌 4. Crear la tabla cruzada (Matriz de Confusión)
+confusion_matrix_present <- table(pred_present_values, arclim_present_values)
+
+# 📌 5. Calcular el índice de Kappa usando caret
+conf_matrix_present <- confusionMatrix(confusion_matrix_present)
+
+# 📌 6. Mostrar resultados
+print(confusion_matrix_present)
+print(conf_matrix_present$overall["Kappa"])
+
 
 # histograma de diferencias -----------------------------------------------
 #no me gustó!!
 
-#par(mfcol = c(1,2))
+par(mfcol = c(1,2))
 
-#hist(values(diff_present), breaks = 50, main = "Diferencia DISMO - ARCLIM \n(1980-2010)",
-#     xlab = "Diferencia de probabilidad", col = "blue")
+hist(values(diff_present), breaks = 50, main = "Diferencia DISMO - ARCLIM \n(1980-2010)",
+     xlab = "Diferencia de probabilidad", col = "blue")
 
-#hist(values(diff_future), breaks = 50, main = "Diferencia DISMO - ARCLIM \n(1980-2010)",
-#     xlab = "Diferencia de probabilidad", col = "blue")
+hist(values(diff_future), breaks = 50, main = "Diferencia DISMO - ARCLIM \n(1980-2010)",
+     xlab = "Diferencia de probabilidad", col = "blue")

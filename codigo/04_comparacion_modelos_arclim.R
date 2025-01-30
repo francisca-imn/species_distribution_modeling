@@ -1,7 +1,8 @@
 library(terra)
+library(RColorBrewer)
 
 # cargar capas de arclim --------------------------------------------------
-zip_path <- "data/arclim_lycalopex_culpaeus.zip"  #cambiar por la especie correspondiente
+zip_path <- "data/arclim_adesmia_atacamensis.zip"  #cambiar por la especie correspondiente
 files_in_zip <- unzip(zip_path, list = TRUE) # Listar los archivos dentro del ZIP
 tif_files <- files_in_zip$Name[grepl("\\.tif$", files_in_zip$Name)] # Filtrar solo los archivos .tif dentro del ZIP
 
@@ -41,13 +42,12 @@ common_range_future <- range(values(arclim_future), values(pred_future_resampled
 
 
 # graficar comparacion arclim-dismo 1980-2010 -----------------------------
-library(RColorBrewer)
 my_palette <- colorRampPalette(brewer.pal(9, "YlGnBu"))  # Amarillo - Verde - Azul
 
 par(mfcol = c(1,2))
 
 plot(pred_present_resampled, 
-     main = "Probabilidad de ocurrencia \nL. culpaeus DISMO 1980-2010",
+     main = "Probabilidad de ocurrencia \n A. atacamensis DISMO 1980-2010",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
@@ -55,7 +55,7 @@ plot(pred_present_resampled,
 mtext(paste("Promedio:", round(prob_present_mean_arclim, 3)), side = 1, line = 3, cex = 0.8)
 
 plot(arclim_present, 
-     main = "Probabilidad ocurrencia ARCLIM \nL. culpaeus ARCLIM 1980-2010",
+     main = "Probabilidad ocurrencia \nA. atacamensis ARCLIM 1980-2010",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
@@ -67,7 +67,7 @@ mtext(paste("Promedio:", round(prob_present_mean, 3)), side = 1, line = 3, cex =
 par(mfcol = c(1,2))
 
 plot(pred_future_resampled, 
-     main = "Probabilidad de ocurrencia \nL. culpaeus DISMO 2035-2065",
+     main = "Probabilidad de ocurrencia \nA. atacamensis DISMO 2035-2065",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
@@ -75,16 +75,9 @@ plot(pred_future_resampled,
 mtext(paste("Promedio:", round(prob_future_mean_arclim, 3)), side = 1, line = 3, cex = 0.8)
 
 plot(arclim_future, 
-     main = "Probabilidad ocurrencia ARCLIM \nL. culpaeus ARCLIM 2035-2065",
+     main = "Probabilidad ocurrencia \nA. atacamensis ARCLIM 2035-2065",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
 mtext(paste("Promedio:", round(prob_future_mean, 3)), side = 1, line = 3, cex = 0.8)
-
-
-
-
-
-
-

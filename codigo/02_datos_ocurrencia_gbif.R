@@ -8,7 +8,7 @@ library(sf)
 library(rJava)
 
 # Obteniendo data de GBIF -------------------------------------------------
-especie_info <- name_backbone(name = "Lycalopex culpaeus")  #cambiar el nombre por el de la especie de interés
+especie_info <- name_backbone(name = "Neuontobotrys tarapacana")  #cambiar el nombre por el de la especie de interés
 
 especie_data <- occ_search(taxonKey = especie_info$usageKey,                         
                            country = "CL",                    #solo datos de Chile
