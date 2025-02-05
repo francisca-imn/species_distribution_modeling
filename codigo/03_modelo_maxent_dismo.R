@@ -26,11 +26,11 @@ prob_future_mean <- cellStats(pred_future, stat = "mean", na.rm = TRUE)
 
 
 # Visualizar --------------------------------------------------------------
-plot(pred_present, main = "Probabilidad de ocurrencia \nAdesmia atacamensis 1980-2010",
+plot(pred_present, main = "Probabilidad de ocurrencia \nA. atacamensis 1980-2010",
      xlim = c(-75, -65), ylim = c(-56, -17), asp=1)
 mtext(paste("Promedio:", round(prob_present_mean, 3)), side = 1, line = 3, cex = 1)
 
-plot(pred_future, main = "Probabilidad de ocurrencia \nAdesmia atacamensis 2035-2065",
+plot(pred_future, main = "Probabilidad de ocurrencia \nA. atacamensis 2035-2065",
      xlim = c(-75, -65), ylim = c(-56, -17), asp=1)
 mtext(paste("Promedio:", round(prob_future_mean, 3)), side = 1, line = 3, cex = 1)
 
@@ -60,7 +60,7 @@ mtext(paste("Promedio:", round(prob_delta_mean, 3)), side = 1, line = 3, cex = 1
 
 
 #writeRaster(difference, "delta.tif", format = "GTiff", overwrite = TRUE)
-#writeRaster(pred, "idoneidad_actual.tif", format = "GTiff", overwrite = TRUE)  #guardar capa
+writeRaster(capas_present_raster, "capas_climas_1980-2010.tif", format = "GTiff", overwrite = TRUE)  #guardar capa
 #writeRaster(future_pred, "idoneidad_futura.tif", format = "GTiff", overwrite = TRUE)  #guardar capa
 
 
