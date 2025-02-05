@@ -3,9 +3,9 @@
     "path": "C:/Users/fmnar/OneDrive/Escritorio/cienciambiental/codigo/06_descarga_datos.R",
     "project_path": "codigo/06_descarga_datos.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "609203969",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1738337848668.0,
     "source_on_save": false,
     "relative_order": 6,
@@ -17,11 +17,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1738766843,
+    "lastKnownWriteTime": 1738769777,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1738769614582,
+    "last_content_update": 1738769777141,
     "read_only": false,
     "read_only_alternatives": []
 }
