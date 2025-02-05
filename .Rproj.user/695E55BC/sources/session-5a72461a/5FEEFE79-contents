@@ -1,6 +1,25 @@
-library(httr)
-library(terra)
-library(jsonlite)
+
+# Descarga SDMs de dismo() ------------------------------------------------
+writeRaster(pred_present_resampled, "pred_dismo_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(pred_future_resampled, "pred_dismo_2035-2065_N-tarapacana.tif", overwrite = TRUE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 📌 URL base de la API ARClim
 url_base <- "https://arclim.mma.gob.cl/api/datos"

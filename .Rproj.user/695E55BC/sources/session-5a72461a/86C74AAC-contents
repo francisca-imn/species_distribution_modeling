@@ -1,10 +1,8 @@
 library(rgbif)
 library(tidyverse)
 library(httr)
-library(jsonlite)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(sf)
 library(rJava)
 
 # Obteniendo data de GBIF -------------------------------------------------

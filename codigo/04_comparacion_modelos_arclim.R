@@ -1,8 +1,7 @@
-library(terra)
 library(RColorBrewer)
 
 # cargar capas de arclim --------------------------------------------------
-zip_path <- "data/arclim_neuontobotrys_tarapacana.zip"  #cambiar por la especie correspondiente
+zip_path <- "data/arclim_myocastor_coypus.zip"  #cambiar por la especie correspondiente
 files_in_zip <- unzip(zip_path, list = TRUE) # Listar los archivos dentro del ZIP
 tif_files <- files_in_zip$Name[grepl("\\.tif$", files_in_zip$Name)] # Filtrar solo los archivos .tif dentro del ZIP
 
@@ -47,7 +46,7 @@ my_palette <- colorRampPalette(brewer.pal(9, "YlGnBu"))  # Amarillo - Verde - Az
 par(mfcol = c(1,2))
 
 plot(pred_present_resampled, 
-     main = "Probabilidad de ocurrencia \nN. tarapacana DISMO 1980-2010",
+     main = "Probabilidad de ocurrencia \nMyocastor coypus DISMO 1980-2010",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
@@ -55,23 +54,17 @@ plot(pred_present_resampled,
 mtext(paste("Promedio:", round(prob_present_mean_arclim, 3)), side = 1, line = 3, cex = 0.8)
 
 plot(arclim_present, 
-     main = "Probabilidad ocurrencia \nN. tarapacana ARCLIM 1980-2010",
+     main = "Probabilidad ocurrencia \nMyocastor coypus ARCLIM 1980-2010",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
 mtext(paste("Promedio:", round(prob_present_mean, 3)), side = 1, line = 3, cex = 0.8)
 
-#writeRaster(difference, "delta.tif", format = "GTiff", overwrite = TRUE)
-#writeRaster(pred_present_resampled, "pred_dismo_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #guardar capa
-#writeRaster(arclim_present, "pred_arclim_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #guardar capa
-
 
 # grafica comparacion arclim-dismo 2035-2065 ------------------------------
-par(mfcol = c(1,2))
-
 plot(pred_future_resampled, 
-     main = "Probabilidad de ocurrencia \nN. taparacana DISMO 2035-2065",
+     main = "Probabilidad de ocurrencia \nMyocastor coypus DISMO 2035-2065",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
@@ -79,12 +72,9 @@ plot(pred_future_resampled,
 mtext(paste("Promedio:", round(prob_future_mean_arclim, 3)), side = 1, line = 3, cex = 0.8)
 
 plot(arclim_future, 
-     main = "Probabilidad ocurrencia \nN. tarapacana ARCLIM 2035-2065",
+     main = "Probabilidad ocurrencia \nMyocastor coypus ARCLIM 2035-2065",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
 mtext(paste("Promedio:", round(prob_future_mean, 3)), side = 1, line = 3, cex = 0.8)
-
-#writeRaster(pred_future_resampled, "pred_dismo_2035-2065_N-tarapacana.tif", overwrite = TRUE)  #guardar capa
-#writeRaster(arclim_future, "pred_arclim_2035-2065_N-tarapacana.tif", overwrite = TRUE)  #guardar capa
