@@ -40,8 +40,6 @@ print(capas_present)
 plot(capas_present)  
 
 
-
-# 📌 Variables tiempo futuro ----------------------------------------------
 # 📌 Variables futuras (proyecciones) -------------------------------------------
 url_base <- "https://arclim.mma.gob.cl/api/datos"  # URL base de la API ARClim
 
@@ -72,7 +70,8 @@ for (var in variables) {  # Descargar y procesar cada variable climática futura
   }
 }
 
-# 📌 Combinar todas las capas en un solo objeto SpatRaster
+
+# 📌 Combinar todas las capas en un solo objeto SpatRaster ----------------------
 capas_future <- rast(raster_list_future)
 
 # 📊 Mostrar información del stack futuro
