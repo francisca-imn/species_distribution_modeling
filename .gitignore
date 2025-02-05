@@ -1,3 +1,4 @@
 # Ignorar archivos ocultos de R y Git
 .Rproj.user/
 .history/
+.RData
