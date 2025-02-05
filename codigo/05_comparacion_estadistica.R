@@ -21,9 +21,6 @@ plot(diff_future, main = "Diferencia DISMO - ARCLIM \n(2035-2065)",
      cex.main = 0.85,
      col = diff_palette(100))
 
-writeRaster(diff_present, "dif_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #guardar capa
-writeRaster(diff_future, "dif_2035-2065_N-tarapacana.tif", overwrite = TRUE)  #guardar capa
-
 
 # Correlación -------------------------------------------------------------
 
