@@ -6,7 +6,7 @@ library(rnaturalearthdata)
 library(rJava)
 
 # Obteniendo data de GBIF -------------------------------------------------
-especie_info <- name_backbone(name = "Myocastor coypus")  #cambiar el nombre por el de la especie de interés
+especie_info <- name_backbone(name = "Adesmia atacamensis")  #cambiar el nombre por el de la especie de interés
 
 especie_data <- occ_search(taxonKey = especie_info$usageKey,                         
                            country = "CL",                    #solo datos de Chile
@@ -43,8 +43,6 @@ data_ocurrencias_filtered <- data_ocurrencias_filtered %>%
 # 📊 Resultados y visualización -------------------------------------------
 print(paste("Registros originales:", nrow(data_ocurrencias)))
 print(paste("Registros filtrados:", nrow(data_ocurrencias_filtered)))
-
-glimpse(data_ocurrencias_filtered)
 
 # 📌 Mantener solo las columnas de coordenadas ----------------------------
 data_ocurrencias_filtered <- data_ocurrencias_filtered %>%

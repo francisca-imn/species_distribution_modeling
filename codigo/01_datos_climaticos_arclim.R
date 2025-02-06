@@ -48,7 +48,7 @@ variables <- c("eto_mean", "pr_sum", "rsds_mean", "tasmin_mean", "tasmax_mean") 
 raster_list_future <- list()  # Crear una lista vacía para almacenar los rasters
 
 for (var in variables) {  # Descargar y procesar cada variable climática futura
-  atributos_future <- paste0("$CLIMA$", var, "$annual$future")  # ✅ CORREGIDO: "futuro" en lugar de "future"
+  atributos_future <- paste0("$CLIMA$", var, "$annual$future")
   url_future <- paste0(url_base, "/arclim_raster_5km/geojson/?attributes=", URLencode(atributos_future))
   
   response_future <- GET(url_future)  # Realizar la consulta a la API

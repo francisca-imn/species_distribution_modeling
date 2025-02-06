@@ -1,4 +1,3 @@
-library(terra)
 library(caret)
 
 # visualizar diferencias entre modelos ------------------------------------
