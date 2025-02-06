@@ -52,8 +52,9 @@ print(extreme_global)
 print("Archivos .tif generados: arclim_recortado.tif y pred_recortado.tif")
 
 # Visualización de los mapas binarios recortados
-plot(arclim_recortado, main="Mapa ARClim Recortado")
-plot(pred_recortado, main="Mapa Predicción Recortado")
+plot(pred_recortado, main="Mapa Predicción 1980-2010")
+plot(arclim_recortado, main="Mapa ARClim 1980-2010")
+
 
 
 # FUTURE TIME (2035-2065) -------------------------------------------------------------------------
@@ -108,6 +109,5 @@ print("Extremos Globales (máximos entre ambos mapas):")
 print(extreme_global_future)
 
 # Visualización de los mapas binarios recortados
-plot(arclim_recortado_future, main="Mapa ARClim Future Recortado")
-plot(pred_recortado_future, main="Mapa Predicción Future Recortado")
-
+plot(pred_recortado_future, main="Mapa Dismo 2035-2065")
+plot(arclim_recortado_future, main="Mapa ARClim 2035-2065")
