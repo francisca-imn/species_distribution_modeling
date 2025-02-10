@@ -1,0 +1,65 @@
+---
+title: "Reporte práctica profesional: Replicación metodología SDMs de Arclim"
+author: Francisca Muñoz Narbona
+date: "`r Sys.Date()`"
+format: pdf
+editor: visual
+---
+
+## Introducción
+
+ARClim, el **Atlas de Riesgos Climáticos para Chile**, es un proyecto del Ministerio del Medio Ambiente del Gobierno de Chile, desarrollado por el Centro de Investigación del Clima y la Resiliciencia (CR2) y el Centro de Cambio Global (CCG-Universidad Católica de Chile), con la colaboración de otras instituciones nacionales e internacionales. El objetivo general de ARClim es desarrollar un conjunto de mapas de riesgos relacionados con el cambio climático para Chile empleando un marco conceptual común y una base de datos consistente. Incluye diversos sectores con cobertura nacional y detalle comunal o puntual, convirtiéndose así en una herramienta importante para el diseño de políticas públicas y la implementación de medidas de adaptación (MMA, 2025). 
+
+Actualmente el mundo se encuentra enfrentando una triple crisis ambiental: el cambio climático, la contaminación y la pérdida de biodiversidad. Por ello, la Guía de Cambio Climático (2023), desarrollada por el Servicio de Evaluación Ambiental (SEA), busca perfeccionar el Sistema de Evaluación de Impacto Ambiental (SEIA) y fortalecer el cumplimiento de los objetivos para aproximar a un desarrollo sustentable del país. Un paso importante en el SEIA es la descripción de los objetos de protección ambiental, receptores de impactos en las áreas de influencia (AI). De este modo, ha de describirse la posible evolución de los componentes ambientales en una situación sin proyecto de impacto, incluyendo la posibilidad de situaciones climáticas extremas, e investigar el posible aumento de riesgos de origen natural, considerando el escenario más desfavorable. 
+
+Un antecedente que se debe considerar para la descripción del AI de la biota es lo señalado por el Mapa de Especies de la plataforma ARClim, que permite visualizar y descargar modelos de distribución de especies para especies de flora y fauna nativas y endémicas presentes en Chile continental, para un período histórico reciente (1980-2010) y un periodo futuro cercano (2035-2065), bajo el escenario RCP8.5.Si bien se encuentran disponibles mapas para especies arbóreas, herbáceas, arbustivas, anfibios, marsupiales, reptiles, aves, insectos y mamíferos, **sólo hay algunas especies modeladas y no todas**.
+
+Es así, que el **objetivo de Cienciambiental es complementar con la información de las especies faltantes de la manera más similar posible a la oficial, replicando la metodología utilizada en la plataforma ARClim**, considernando información adicional proporcionada por la empresa. 
+
+## Metodología
+
+En la plataforma ARClim se realizan modelos de distribución de especies para Chile continental para 440 especies de flora y 110 especies de fauna, para un periodo histórico reciente (1980-2010) y un periodo futuro cercano (2035-2065), bajo el peor escenario RCP8.5. En cada caso se muestra la probabilidad de presencia por especie en cada píxel de 5x5 km2, con valores entre 0 (no hay probabilidad) y 1 (máxima probabilidad) obtenidos a partir del **modelo Maxent**. Este modelo emplea un conjunto de variables ambientales y observaciones de ocurrencia georreferenciada, y el modelamiento fue desarrollado por el grupo del profesor Patricio Pliscoff de la Pontificia Universidad Católica de Chile. 
+
+En el trabajo de ARClim, se emplearon **cinco variables climáticas anuales: evapotranspiración promedio, precipitación acumulada, promedio de insolación diaria, promedio de temperatura mínima diaria y promedio de temperatura máxima diaria**. Estas variables fueron obtenidas a partir de simulaciones climáticas realizadas para el proyecto ARClim (empleando 35 modelos globales interados entre 1970 y 2070), estas variables fueron sometidas a un proceso de escalamiento (downscaling) llevándolas a una grilla de cobertura nacional, pero con **resolución de 5x5 km2**. Por otro lado, los **datos de observaciones de ocurrencia georreferencia de las especies**, fueron compiladas a partir de los resultados del **proyecto Fondecyt 1181677**, liderado por P. Pliscoff. 
+
+Para cumplir el objetivo de Cienciambiental y replicar de mejor manera posible la metodología descrita en ARClim para modelos de distribución de especies, se utiliza el paquete Dismo en R para utilizar el modelo Maxent. Respecto a las variables climáticas, se utilizan las mismas proporcionadas en ARClim, obtenidas a través de su API, y sobre los datos de ocurrencia georreferencia, se utiliza como fuente la plataforma GBIF. Ambos datos son obtenidos y manipulados a través de Rstudio. Sólo a los datos de ocurrencia de les aplican filtros para que sean de mejor calidad y confiables, es decir: sin problemas geoespaciales, de fuentes confiables, con incertidumbre de coordenadas menor a 1000m, taxonomía aceptada y sin datos repetidos.
+
+Una vez corrido el modelo Maxent con el paquete Dismo y obtenidos los mapas de distribución, se realiza una comparación estadística entre estos mapas y los disponibles en la plataforma ARClim, para las mismas especies. Se realiza una nuevo mapa que refleja las diferencias de probabilidades entre ambas fuentes (de Cienciambiental y ARClim), un análisis de correlación, una matriz de confusión y se obtiene el índice kappa. Todo lo anterior permite evaluar la similitud entre mapas de distribución de especies, se realiza tanto para tiempo histórico como para futuro, y sólo en las regiones de Chile en donde la especie puede distribuírse. Además, se hace un revisión en Qgis de todas las capas obtenidas.
+
+Todo el proyecto es subido a un [Repositorio en GitHub](https://github.com/francisca-imn/species_distribution_modeling) para una mejor reproducibilidad del código y compartir el trabajo con el equipo de datos de la empresa. El proyecto cuenta con siete scripts de R: 
+
+(1) Para obtener datos climáticos de ARClim.
+(2) Para obtener datos de ocurrencia de GBIF.
+(3) Realizar el modelo Maxent.
+(4) Comparación estadística entre modelos obtenidos con paquete Dismo y los disponibles en ARClim.
+(5) Descarga de datos y capas de mapas obtenidos. *Opcional*.
+
+
+## Resultados
+
+
+
+
+
+
+
+
+
+
+
+
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
