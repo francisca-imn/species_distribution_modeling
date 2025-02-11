@@ -40,7 +40,10 @@ pred_future_resampled <- extend(pred_future_resampled, arclim_future)  # Asegura
 common_range_future <- range(values(arclim_future), values(pred_future_resampled), na.rm = TRUE)
 
 
-# graficar comparacion arclim-dismo 1980-2010 -----------------------------
+# graficar comparacion arclim-dismo 1980-2010 ---------------------------------------------
+
+png("figuras/comparacion_visual_A-atacamensis.png", width = 1200, height = 600, res = 150)  # Ajustar tamaño y resolución
+
 my_palette <- colorRampPalette(brewer.pal(9, "YlGnBu"))  # Amarillo - Verde - Azul
 
 par(mfcol = c(1,2))
@@ -51,7 +54,6 @@ plot(pred_present_resampled,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
-mtext(paste("Promedio:", round(prob_present_mean_arclim, 3)), side = 1, line = 3, cex = 0.8)
 
 plot(arclim_present, 
      main = "Probabilidad ocurrencia \nA. atacamensis ARCLIM 1980-2010",
@@ -59,17 +61,25 @@ plot(arclim_present,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
-mtext(paste("Promedio:", round(prob_present_mean, 3)), side = 1, line = 3, cex = 0.8)
+
+# Cerrar el dispositivo gráfico
+dev.off()
+
+print("Figura guardada en la carpeta 'figuras/comparacion_mapas.png'")
 
 
-# grafica comparacion arclim-dismo 2035-2065 ------------------------------
+# grafica comparacion arclim-dismo 2035-2065 ----------------------------------------------
+png("reportes/comparacion_visual_future_A-atacamensis.png", width = 1200, height = 600, res = 150)  # Ajustar tamaño y resolución
+my_palette <- colorRampPalette(brewer.pal(9, "YlGnBu"))  # Amarillo - Verde - Azul
+
+par(mfcol = c(1,2))
+
 plot(pred_future_resampled, 
      main = "Probabilidad de ocurrencia \nA. atacamensis DISMO 2035-2065",
      xlim = c(-77, -66), ylim = c(-56, -17), asp=1,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
-mtext(paste("Promedio:", round(prob_future_mean_arclim, 3)), side = 1, line = 3, cex = 0.8)
 
 plot(arclim_future, 
      main = "Probabilidad ocurrencia \nA. atacamensis ARCLIM 2035-2065",
@@ -77,4 +87,6 @@ plot(arclim_future,
      zlim = common_range,
      col = my_palette(100),  
      cex.main = 0.85)  
-mtext(paste("Promedio:", round(prob_future_mean, 3)), side = 1, line = 3, cex = 0.8)
+
+dev.off()
+

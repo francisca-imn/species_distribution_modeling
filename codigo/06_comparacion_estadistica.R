@@ -8,6 +8,7 @@ diff_present_recortado <- pred_recortado - arclim_recortado
 diff_palette <- colorRampPalette(c("blue", "white", "red"))  # Azul (-), Blanco (0), Rojo (+)
 
 # Graficar diferencias espaciales
+png("reportes/diff_binarios_A-atacamensis.png", width = 1200, height = 600, res = 150)  # Ajustar tamaño y resolución
 par(mfcol = c(1,2))
 
 plot(diff_present_recortado, main = "Diferencia DISMO - ARCLIM \n(1980-2010)",
@@ -17,7 +18,7 @@ plot(diff_present_recortado, main = "Diferencia DISMO - ARCLIM \n(1980-2010)",
 plot(diff_future, main = "Diferencia DISMO - ARCLIM \n(2035-2065)",
      cex.main = 0.85,
      col = diff_palette(100))
-
+dev.off()
 
 # Correlación ---------------------------------------------------------------------
 
@@ -53,6 +54,7 @@ arclim_values_future <- arclim_values_future[valid_indices_future]
 
 # 4. Crear la tabla cruzada (Matriz de Confusión)
 confusion_matrix_future <- table(pred_values_future, arclim_values_future)
+saveRDS(confusion_matrix_future, "reportes/confusion_matrix_future.rds")
 
 # Mostrar la matriz de confusión
 print(confusion_matrix_future)
@@ -83,6 +85,7 @@ arclim_values <- arclim_values[valid_indices]
 confusion_matrix <- table(pred_values, arclim_values)
 
 # Mostrar la matriz de confusión
+saveRDS(confusion_matrix, "reportes/confusion_matrix_historico.rds")
 print(confusion_matrix)
 
 # 5. Calcular el índice de Kappa usando caret
