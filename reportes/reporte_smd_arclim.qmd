@@ -109,20 +109,44 @@ library(knitr)
 kable(confusion_matrix_future, caption = "Matriz de Confusión para el Escenario Futuro")
 ```
 
+## Discusión
+
+La replicación de la metodología utilizada en ARClim para la modelación de distribución de *Adesmia atacamensis* en Cienciambiental permitió evaluar la similitud entre ambos modelos y detectar posibles factores que influyen en las diferencias observadas.
+
+En términos generales, los resultados muestran una correlación de **0.613 para el período histórico (1980-2010) y 0.663 para el período futuro (2035-2065)**. Estos valores indican una correspondencia moderada entre las modelaciones, lo que sugiere que la metodología implementada en Cienciambiental es capaz de aproximarse en cierta medida a los modelos de ARClim. Sin embargo, la **matriz de confusión y el índice Kappa (0.58 y 0.64, respectivamente)** evidencian que existen discrepancias que deben ser consideradas.
+
+Uno de los aspectos más notorios al analizar las figuras generadas es la presencia de **patrones extraños en los mapas de distribución**, lo que motivó una revisión de las capas climáticas utilizadas en el modelamiento. Se identificó que algunas variables, especialmente la **precipitación acumulada**, podrían estar introduciendo estas estructuras anómalas en los mapas. Esto sugiere la necesidad de un análisis más detallado de las capas climáticas antes de ser utilizadas en los modelos, ya que una variable inadecuada o con errores en su proyección puede afectar significativamente los resultados.
+
+Otro factor que podría estar influyendo en los resultados es la **falta de información detallada sobre la metodología de ARClim**. Si bien se utilizaron las mismas variables climáticas y el mismo modelo Maxent, **no se cuenta con los datos de ocurrencia empleados en ARClim**, lo que impide saber si se aplicaron filtros adicionales o si hubo un ajuste específico de los parámetros del modelo. Además, el uso exclusivo de **cinco variables climáticas** puede ser insuficiente para representar todos los factores ecológicos que determinan la distribución de la especie. Es probable que otras variables, como **factores edáficos, topográficos o de uso de suelo**, tengan un impacto importante en la distribución de la especie y no estén siendo consideradas en el modelo actual.
+
+Otro punto importante a considerar es el impacto de **la resolución espacial en los resultados**. En ARClim, los modelos utilizan una resolución de **5x5 km**, lo que puede ser adecuado para algunas especies pero insuficiente para otras con distribuciones más locales. En este sentido, sería relevante evaluar si realizar un **downscaling** o usar datos con mayor resolución permitiría capturar mejor la distribución de *Adesmia atacamensis* y reducir las diferencias entre ambos modelos.
+
+Además, aunque se compararon los modelos generados con los de ARClim, **no se realizó una validación independiente de los resultados**. Sería ideal contar con datos de monitoreo en terreno o registros independientes que permitan contrastar las predicciones con observaciones reales. Esto ayudaría a determinar cuál de los modelos se acerca más a la distribución real de la especie y no depender exclusivamente de la comparación entre mapas generados con metodologías distintas.
+
+Un aspecto clave que aún no se ha abordado en profundidad es la **incertidumbre en las predicciones**. En este tipo de modelamiento, no solo es importante conocer la distribución proyectada de una especie, sino también **cuánta confianza se tiene en esas predicciones**. Cuantificar la incertidumbre ayudaría a entender mejor qué variables tienen mayor impacto en el modelo y en qué zonas del mapa las predicciones son menos confiables.
+
+Por último, sería interesante evaluar si **otros enfoques de modelamiento podrían mejorar los resultados**. Si bien MaxEnt es un modelo ampliamente utilizado en este tipo de análisis, otras metodologías como **Random Forest, GAMs o redes neuronales** podrían ser probadas para determinar si permiten obtener predicciones más precisas o robustas.
+
+Si bien la replicación de la metodología fue exitosa en términos de estructura y procesamiento de datos, aún existen diferencias en los resultados que sugieren que **se necesita un mayor control sobre las variables de entrada y una mejor comprensión de los datos utilizados en ARClim**. Esto permitirá optimizar el proceso y mejorar la precisión de los modelos generados.
+
+
+## Conclusión
+
+La iniciativa de Cienciambiental de replicar la metodología de ARClim para generar mapas de distribución de especies fue un esfuerzo valioso para comprender el proceso de modelamiento y evaluar su reproducibilidad. Se logró generar mapas comparables y evaluar estadísticamente la similitud entre ambos enfoques. Sin embargo, los resultados indican que existen **diferencias significativas en las predicciones**, lo que resalta la importancia de analizar con mayor profundidad los **datos de entrada**, en particular, la selección y calidad de las capas climáticas y la disponibilidad de datos de ocurrencia.
+
+A pesar de las limitaciones, este estudio representa un **primer paso importante** en la exploración de modelos de distribución de especies dentro de Cienciambiental. Se continuará trabajando en esta línea, pero con enfoques más avanzados que incorporen un **mayor número de variables ambientales** y técnicas de modelamiento más sofisticadas.
+
+En definitiva, replicar la metodología de ARClim es un desafío que requiere no solo una correcta implementación técnica, sino también un acceso detallado a la información utilizada en la modelación original. Para futuras investigaciones, será clave contar con una base de datos más robusta, analizar con mayor detalle los insumos de entrada y explorar la integración de otras metodologías complementarias.
+
+### **Líneas futuras de trabajo**
+- **Revisión más detallada de los datos de entrada**, incluyendo datos de ocurrencia y capas climáticas.
+- **Evaluación del impacto de la resolución espacial** en la precisión de los modelos.
+- **Comparación con otros algoritmos de modelamiento**, como Random Forest, GAMs o redes neuronales.
+- **Cuantificación de la incertidumbre** en las predicciones para mejorar la interpretación de los mapas.
+- **Exploración de validaciones independientes** con datos de monitoreo en terreno.
+- **Aplicaciones prácticas de los modelos**, por ejemplo, en evaluación ambiental y conservación.
+
+Con estas mejoras, Cienciambiental podrá fortalecer su capacidad para generar modelos de distribución de especies más precisos y confiables, contribuyendo a la toma de decisiones en conservación y planificación ambiental.
 
 
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
