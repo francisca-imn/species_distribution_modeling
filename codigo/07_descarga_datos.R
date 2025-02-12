@@ -16,13 +16,8 @@ writeRaster(arclim_recortado, "data/resultados/pred_arclim_1980-2010_recortado_A
 writeRaster(pred_recortado_future, "data/resultados/pred_dismo_2035-2065_recortado_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
 writeRaster(arclim_recortado_future, "data/resultados/pred_arclim_2035-2065_recortado_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
 
+# Descarga mapa binario diferencia (dismo - arclim) -----------------------
+writeRaster(diff_present_recortado, "data/resultados/dif_1980-2010_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(diff_future, "data/resultados/dif_2035-2065_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
 
-
-# Descarga mapa diferencia (dismo - arclim) -------------------------------
-writeRaster(diff_present, "dif_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
-writeRaster(diff_future, "dif_2035-2065_N-tarapacana.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
-
-# Guardar los mapas binarios si es necesario
-writeRaster(arclim_binary, "arclim_binary.tif", overwrite=TRUE)
-writeRaster(pred_binary, "pred_binary.tif", overwrite=TRUE)
 
