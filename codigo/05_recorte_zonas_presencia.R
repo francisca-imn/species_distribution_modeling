@@ -40,10 +40,6 @@ recorte_extent <- ext(
 arclim_recortado <- crop(arclim_binary, recorte_extent)
 pred_recortado <- crop(pred_binary, recorte_extent)
 
-# Guardar los mapas recortados como archivos .tif
-#writeRaster(arclim_recortado, "arclim_recortado.tif", overwrite=TRUE)
-#writeRaster(pred_recortado, "pred_recortado.tif", overwrite=TRUE)
-
 # Imprimir resultados
 print("Extremos Globales (máximos entre ambos mapas, solo en latitud):")
 print(extreme_global)
@@ -100,10 +96,6 @@ recorte_extent_future <- ext(
 # Recortar ambos mapas con la nueva extensión
 arclim_recortado_future <- crop(arclim_binary_future, recorte_extent_future)
 pred_recortado_future <- crop(pred_binary_future, recorte_extent_future)
-
-# Guardar los mapas recortados como archivos .tif
-#writeRaster(arclim_recortado_future, "arclim_recortado_future.tif", overwrite=TRUE)
-#writeRaster(pred_recortado_future, "pred_recortado_future.tif", overwrite=TRUE)
 
 # Imprimir resultados
 print("Extremos Globales (máximos entre ambos mapas, solo en latitud):")

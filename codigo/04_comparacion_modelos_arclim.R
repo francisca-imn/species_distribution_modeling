@@ -65,8 +65,6 @@ plot(arclim_present,
 # Cerrar el dispositivo gráfico
 dev.off()
 
-print("Figura guardada en la carpeta 'figuras/comparacion_mapas.png'")
-
 
 # grafica comparacion arclim-dismo 2035-2065 ----------------------------------------------
 png("reportes/comparacion_visual_future_A-atacamensis.png", width = 1200, height = 600, res = 150)  # Ajustar tamaño y resolución

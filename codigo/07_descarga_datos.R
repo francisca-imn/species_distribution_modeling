@@ -7,8 +7,16 @@ df_sf <- st_as_sf(data_ocurrencias_filtered, coords = c("decimalLongitude", "dec
 st_write(df_sf, "puntos_Lycalopex-griseus.shp", delete_layer = TRUE)  #cambiar nombre especie si corresponde
 
 # Descarga SDMs de dismo() ------------------------------------------------
-writeRaster(pred_present_resampled, "pred_dismo_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
-writeRaster(pred_future_resampled, "pred_dismo_2035-2065_N-tarapacana.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(pred_present_resampled, "data/resultados/pred_dismo_1980-2010_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(pred_future_resampled, "data/resultados/pred_dismo_2035-2065_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+
+# Descarga mapas binarios en zonas de interés -----------------------------
+writeRaster(pred_recortado, "data/resultados/pred_dismo_1980-2010_recortado_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(arclim_recortado, "data/resultados/pred_arclim_1980-2010_recortado_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(pred_recortado_future, "data/resultados/pred_dismo_2035-2065_recortado_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+writeRaster(arclim_recortado_future, "data/resultados/pred_arclim_2035-2065_recortado_A-atacamensis.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
+
+
 
 # Descarga mapa diferencia (dismo - arclim) -------------------------------
 writeRaster(diff_present, "dif_1980-2010_N-tarapacana.tif", overwrite = TRUE)  #cambiar nombre especie si corresponde
