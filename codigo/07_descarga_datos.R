@@ -1,6 +1,6 @@
 # Descarga capas climáticas -----------------------------------------------
 writeRaster(capas_present_raster, "capas_clima_1980-2010.tif", overwrite = TRUE)
-writeRaster(capas_future_raster, "capas_clima_1980-2010.tif", overwrite = TRUE)
+writeRaster(capas_future_raster, "capas_clima_2035-2010.tif", overwrite = TRUE)
 
 # Descarga datos de ocurrencia --------------------------------------------
 df_sf <- st_as_sf(data_ocurrencias_filtered, coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
